@@ -37,16 +37,13 @@ function Homepage({ switchComp }) {
   const classes = useStyles();
   const [user, setUser] = useContext(UserContext)
   const [pollData, setPollData] = useState([])
+  
 
   useEffect(() => {
-    database.collection('polls').get()
+    database.collection('polls').orderBy('created_at', 'desc').get()
       .then((querySnapshot) => {
         setPollData(querySnapshot.docs.map((doc) => doc.data()))
       });
-  }, [])
-
-  useEffect(() => {
-    console.log(pollData)
   }, [pollData])
 
   const signOut = () => {
@@ -58,6 +55,7 @@ function Homepage({ switchComp }) {
       })
       .catch((error) => alert(error.message))
   }
+
   return (
     <Container className={classes.root}>
       <Grid container className={classes.head1}>

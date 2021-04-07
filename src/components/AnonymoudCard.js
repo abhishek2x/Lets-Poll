@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Slider } from '@material-ui/core';
+import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Slider } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 export default function AnonymousCard({ pollData2 }) {
   const classes = useStyles();
   const [value, setValue] = React.useState('1');
+  const [flag, setFlag] = useState(false)
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -50,7 +51,6 @@ export default function AnonymousCard({ pollData2 }) {
           </Typography>
 
           <FormControl component="fieldset">
-            <FormLabel component="legend">Gender</FormLabel>
             <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
               <FormControlLabel color="#000" value="1" control={<Radio />} label={data.option1} />
               <FormControlLabel color="#000" value="2" control={<Radio />} label={data.option2} />
@@ -61,68 +61,80 @@ export default function AnonymousCard({ pollData2 }) {
 
         </CardContent>
 
-        <div className={classes.result}>
-          <Typography id="discrete-slider" gutterBottom>
-            {data.option1}
-          </Typography>
-          <Slider
-            defaultValue={30}
-            aria-labelledby="discrete-slider"
-            valueLabelDisplay="auto"
-            min={0}
-            max={100}
-            disabled
-          />
-          <br />
-          <Typography id="discrete-slider" gutterBottom>
-            {data.option2}
-          </Typography>
-          <Slider
-            defaultValue={30}
-            aria-labelledby="discrete-slider"
-            valueLabelDisplay="auto"
-            min={0}
-            max={100}
-            disabled
-          />
-          <br />
-          <Typography id="discrete-slider" gutterBottom>
-            {data.option3}
-          </Typography>
-          <Slider
-            defaultValue={30}
-            aria-labelledby="discrete-slider"
-            valueLabelDisplay="auto"
-            min={0}
-            max={100}
-            disabled
-          />
-          <br />
-          <Typography id="discrete-slider" gutterBottom>
-            {data.option4}
-          </Typography>
-          <Slider
-            defaultValue={30}
-            aria-labelledby="discrete-slider"
-            valueLabelDisplay="auto"
-            min={0}
-            max={100}
-            disabled
-          />
+        <Button
+          // startIcon={<CalendarViewDayIcon />}
+          color="secondary"
+          variant="contained"
+          docId={data.id}
+          // onClick={submitPoll}
+          style={{ marginLeft: '38%' }}
+        >
+          Submit
+          </Button>
+        <br />
+        { flag ? (
+          <div className={classes.result}>
+            <Typography id="discrete-slider" gutterBottom>
+              {data.option1}
+            </Typography>
+            <Slider
+              defaultValue={30}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              disabled
+            />
+            <br />
+            <Typography id="discrete-slider" gutterBottom>
+              {data.option2}
+            </Typography>
+            <Slider
+              defaultValue={30}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              disabled
+            />
+            <br />
+            <Typography id="discrete-slider" gutterBottom>
+              {data.option3}
+            </Typography>
+            <Slider
+              defaultValue={30}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              disabled
+            />
+            <br />
+            <Typography id="discrete-slider" gutterBottom>
+              {data.option4}
+            </Typography>
+            <Slider
+              defaultValue={30}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              disabled
+            />
 
-          <Button
-            // startIcon={<CalendarViewDayIcon />}
-            color="secondary"
-            variant="contained"
-            docId={data.id}
+            <Button
+              // startIcon={<CalendarViewDayIcon />}
+              color="secondary"
+              variant="contained"
+              docId={data.id}
             // onClick={submitPoll}
-          >
-            Submit
+            >
+              Submit
           </Button>
 
-        </div>
-      </Card>
-    ))
+          </div>
+        ) : (<></>)}
 
-  );
+      </Card>
+    )));
 }

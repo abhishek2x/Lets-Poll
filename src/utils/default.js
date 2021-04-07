@@ -4,13 +4,7 @@ export const FirebaseUserDefaultData = {
   option2: '',
   option3: '',
   option4: '',
-  count1: [],
-  count2: [],
-  count3: [],
-  count4: [],
-  countAll: [],
   created_by: '',
   created_at: '',
   isAnonymous: false,
-  canVote: true,
 }
