@@ -19,3 +19,5 @@ Logged out user can only vote
 
 You may use any framework of your choice. You are free to add more features of your choice( add tags, configure time to expire, search polls, etc). Preference will also be given to a better user interface. Please deploy your code on any free hosting service and share the link of the site.
  
+
+ <img src="./README_IMAGES/React-App.png" />
