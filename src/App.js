@@ -1,6 +1,7 @@
 import { createMuiTheme, Fab, Paper, ThemeProvider } from '@material-ui/core';
 import Homepage from './components/Homepage'
 import "./App.css";
+import { UserContextProvider } from "./context/userContext"
 
 function App() {
 
@@ -15,16 +16,18 @@ function App() {
         dark: '#f5f4ff'
       },
       secondary: {
-        light: '#ffffff',
-        main: '#ffffff',
-        dark: '#ffffff'
+        light: 'rgba(0, 0, 0, 0.54)',
+        main: 'rgba(0, 0, 0, 0.54)',
+        dark: 'rgba(0, 0, 0, 0.54)'
       },
     }
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <Homepage />
+      <UserContextProvider>
+        <Homepage />
+      </UserContextProvider>
     </ThemeProvider>
   );
 }

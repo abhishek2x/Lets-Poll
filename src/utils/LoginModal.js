@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Container, Typography } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import { auth, database, providerGoogle, providerGitHub } from '../firebase-config'
-// import { UserContext } from '../context/userContext';
 import MainForm from '../forms/MainForm';
+import { UserContext } from '../context/userContext';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginModal() {
   const classes = useStyles();
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     email: '',
