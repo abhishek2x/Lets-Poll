@@ -1,4 +1,5 @@
 export const FirebaseUserDefaultData = {
+  poll_id: 0,
   question: '',
   option1: '',
   option2: '',
