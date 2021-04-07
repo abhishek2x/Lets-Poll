@@ -34,16 +34,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InputAdornments() {
   const classes = useStyles();
-  const [user, setUser] = useContext(UserContext)
   const [values, setValues] = useState(FirebaseUserDefaultData);
-  // Date dateStart = new Date();
-  // Date dateEnd = new Date();
-  // System.out.println(dateEnd.getTime() - dateStart.getTime()/1000);
 
   const createPoll = () => {
     const currentDate = new Date()
     database.collection('polls').add({
       ...values,
+      poll_id: Math.floor(Math.random() * (10000000 - 100000 + 1)) + 100000,
+      option1_count: 0,
+      option2_count: 0,
+      option3_count: 0,
+      option4_count: 0,
       created_by: firebase.auth().currentUser.displayName,
       created_at: currentDate.getTime()
     })

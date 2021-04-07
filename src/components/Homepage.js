@@ -33,11 +33,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Homepage({ switchComp }) {
+function Homepage() {
   const classes = useStyles();
   const [user, setUser] = useContext(UserContext)
   const [pollData, setPollData] = useState([])
-  
 
   useEffect(() => {
     database.collection('polls').orderBy('created_at', 'desc').get()
@@ -137,7 +136,7 @@ function Homepage({ switchComp }) {
           <Grid item md={2}>
           </Grid>
           <Grid item md={5}>
-            <AnonymousCard pollData2={pollData}/>
+            <AnonymousCard pollData2={pollData} />
           </Grid>
         </Grid>
       </Container>

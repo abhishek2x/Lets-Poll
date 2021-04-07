@@ -1,4 +1,4 @@
-import { createMuiTheme, Fab, Paper, ThemeProvider } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import Homepage from './components/Homepage'
 import "./App.css";
 import { UserContextProvider } from "./context/userContext"

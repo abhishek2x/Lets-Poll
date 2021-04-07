@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button, Container, Typography } from '@material-ui/core';
-import { auth, database, providerGoogle, providerGitHub } from '../firebase-config'
+import { Container, Typography } from '@material-ui/core';
+import { auth, providerGoogle, providerGitHub } from '../firebase-config'
 import MainForm from '../forms/MainForm';
 import { UserContext } from '../context/userContext';
 
