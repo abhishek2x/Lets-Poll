@@ -40,7 +40,6 @@ export default function InputAdornments() {
     const currentDate = new Date()
     database.collection('polls').add({
       ...values,
-      poll_id: Math.floor(Math.random() * (10000000 - 100000 + 1)) + 100000,
       option1_count: 0,
       option2_count: 0,
       option3_count: 0,

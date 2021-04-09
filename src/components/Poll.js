@@ -33,11 +33,15 @@ const useStyles = makeStyles({
 function Poll({ data }) {
   const classes = useStyles();
   const [value, setValue] = React.useState('1');
-  const [flag, setFlag] = useState(true)
-  // const [userActive] = useContext(UserContext)
+  const [voted, setVoted] = useState(false)
+  const [userActive] = useContext(UserContext)
 
   useEffect(() => {
-    console.log(data)
+    data.answered_by.forEach(name => {
+      if (name === userActive) {
+        setVoted(false);
+      }
+    });
   }, [])
 
   const handleChange = (event) => {
@@ -65,7 +69,7 @@ function Poll({ data }) {
         <Typography variant="h5" component="h2">
           {data.question}
         </Typography>
-        <FormControl component="fieldset">
+        {!voted && (<FormControl component="fieldset">
           <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
             <FormControlLabel
               color="#000"
@@ -92,7 +96,7 @@ function Poll({ data }) {
               label={data.option4}
             />
           </RadioGroup>
-        </FormControl>
+        </FormControl>)}
       </CardContent>
 
       <Button
@@ -107,7 +111,7 @@ function Poll({ data }) {
       </Button>
       <br />
 
-      { !flag ? (
+      { voted ? (
         <div className={classes.result}>
           <Typography id="discrete-slider" gutterBottom>
             {data.option1}

@@ -1,5 +1,4 @@
 export const FirebaseUserDefaultData = {
-  poll_id: 0,
   question: '',
   option1: '',
   option2: '',
@@ -12,4 +11,5 @@ export const FirebaseUserDefaultData = {
   created_by: '',
   created_at: '',
   isAnonymous: false,
+  answered_by: [],
 }
