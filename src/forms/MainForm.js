@@ -62,7 +62,6 @@ function MainForm({
   handleClickShowPassword,
   handleMouseDownPassword,
   signInGoogle,
-  signInGitHub,
   values,
   setValues,
   CreateUser,
@@ -117,7 +116,6 @@ function MainForm({
         handleClickShowPassword={handleClickShowPassword}
         handleMouseDownPassword={handleMouseDownPassword}
         signInGoogle={signInGoogle}
-        signInGitHub={signInGitHub}
         values={values}
         setValues={setValues}
       />

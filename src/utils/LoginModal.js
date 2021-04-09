@@ -63,19 +63,6 @@ export default function LoginModal() {
       })
   }
 
-  const signInGitHub = (e) => {
-    e.preventDefault();
-    auth
-      .signInWithPopup(providerGitHub)
-      .then((result) => {
-        console.log(result)
-        setUser(result.additionalUserInfo.username)
-      })
-      .catch((err) => {
-        alert(err)
-      })
-  }
-
   const SignInUser = (e) => {
     e.preventDefault();
     auth
@@ -153,7 +140,6 @@ export default function LoginModal() {
                   handleClickShowPassword={handleClickShowPassword}
                   handleMouseDownPassword={handleMouseDownPassword}
                   signInGoogle={signInGoogle}
-                  signInGitHub={signInGitHub}
                   values={values}
                   setValues={setValues}
                   CreateUser={CreateUser}

@@ -17,15 +17,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BottomLinks({
-  signInGoogle,
-  signInGitHub }) {
+  signInGoogle }) {
 
   const classes = useStyles();
   return (
     <div className={classes.icons}>
-      <Button type="button" onClick={signInGitHub}>
-        <GitHubIcon className={classes.icon} />
-      </Button>
       <Button type="button" onClick={signInGoogle}>
         <img src={GmailIcon} alt="Sample Google" className={classes.icon} />
       </Button>

@@ -5,7 +5,7 @@ import "././../App.css"
 import AnonymousCard from '../components/AnonymoudCard';
 import LoginComp from '../components/LoginComp';
 import MainCard from '../components/MainCard';
-import PollForm from '../components/PollForm';
+import PollForm from '../forms/PollForm';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import { auth } from '../firebase-config';
 
@@ -133,7 +133,7 @@ function Homepage({ pollData }) {
             <Typography
               align="center"
               color="secondary"
-              variant="h4"
+              variant="h5"
               component="h3"
             >
               Login to Create a Poll
@@ -147,11 +147,27 @@ function Homepage({ pollData }) {
       <Container>
         <Grid container>
           <Grid item md={5}>
+            <Typography
+              align="center"
+              color="secondary"
+              variant="subtitle"
+              component="h3"
+            >
+              Public Poll
+          </Typography>
             <MainCard pollData1={pollData} />
           </Grid>
           <Grid item md={2}>
           </Grid>
           <Grid item md={5}>
+            <Typography
+              align="center"
+              color="secondary"
+              variant="subtitle"
+              component="h3"
+            >
+              Private Poll
+          </Typography>
             <AnonymousCard pollData2={pollData} />
           </Grid>
         </Grid>

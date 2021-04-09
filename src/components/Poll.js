@@ -91,7 +91,21 @@ function Poll({ data }) {
     // console.log("changing value", value)
   };
 
-  const submitPoll = () => {
+  const deleteIt = () => {
+
+    var docRef = database.collection("polls").doc(data.id)
+
+    docRef.delete()
+      .then(() => {
+        alert("Poll Deleted")
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  const submitPoll = (e) => {
+    e.preventDefault();
     var docRef = database.collection("polls").doc(data.id)
 
     // console.log("In submit poll", value, " ", typeof(value))
@@ -132,15 +146,10 @@ function Poll({ data }) {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        {!data.isAnonymous ? (
-          <Typography color="textSecondary" gutterBottom>
-            The Poll is create by {data.created_by}
-          </Typography>
-        ) : (
-          <Typography color="textSecondary" gutterBottom>
-            Anonymous Poll
-          </Typography>
-        )}
+        <Typography color="textSecondary" gutterBottom>
+          The Poll is create by {data.created_by}
+        </Typography>
+
         <Typography variant="h5" component="h2">
           {data.question}
         </Typography>
@@ -185,12 +194,12 @@ function Poll({ data }) {
         {data.created_by === userActive && (<Button
           style={{ backgroundColor: '#be93c5' }}
           variant="contained"
-        // onClick={submitPoll}
+          onClick={deleteIt}
         >
           Delete Poll
         </Button>)}
 
-        {!data.isAnonymous && (<ResultModal names={data.answered_by} />)}
+        {!data.isAnonymous && voted && (<ResultModal names={data.answered_by} />)}
       </div>
 
       <br />
