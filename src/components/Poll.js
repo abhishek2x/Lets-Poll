@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup, Slider } from '@material-ui/core';
+import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import { database } from '../firebase-config';
 import firebase from 'firebase'
@@ -18,7 +18,7 @@ function LinearProgressWithLabel(props) {
         <LinearProgress variant="determinate" {...props} />
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">{`${Math.round(
+        <Typography variant="body2" color="textSecondary">{`${Math.floor(
           props.value,
         )}%`}</Typography>
       </Box>
@@ -61,11 +61,25 @@ function Poll({ data }) {
   const [ans2, setAns2] = useState(0)
   const [ans3, setAns3] = useState(0)
   const [ans4, setAns4] = useState(0)
+  const [time, setTime] = useState(0)
 
+  useEffect(() => {
+    const everySec = setInterval(() => {
+      const currentDate = new Date()
+      const currTime = currentDate.getTime()
+      // console.log((currTime - data.created_at) / 1000)
+      setTime((currTime - data.created_at) / 1000)
+      if ((currTime - data.created_at > 300) && !data.is_expired) {
+        database.collection("polls").doc(data.id).update({
+          is_expired: true
+        })
+      }
+    }, 1000)
+    return () => clearInterval(everySec);
+  }, [data.created_at, data.id, data.is_expired]);
 
   useEffect(() => {
     console.log("checkking if already answerd")
-
 
     data.answered_by.forEach(name => {
       if (name === userActive) {
@@ -78,7 +92,7 @@ function Poll({ data }) {
     setAns3((data.option3_count / (data.option1_count + data.option2_count + data.option3_count + data.option4_count)) * 100)
     setAns4((data.option4_count / (data.option1_count + data.option2_count + data.option3_count + data.option4_count)) * 100)
 
-    if (ans1 === NaN && ans2 === NaN && ans3 === NaN && ans4 === NaN) {
+    if (ans1.isNaN && ans2.isNaN && ans3.isNaN && ans4.isNaN) {
       setAns1(0);
       setAns2(0);
       setAns3(0);
@@ -88,13 +102,10 @@ function Poll({ data }) {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    // console.log("changing value", value)
   };
 
   const deleteIt = () => {
-
     var docRef = database.collection("polls").doc(data.id)
-
     docRef.delete()
       .then(() => {
         alert("Poll Deleted")
@@ -150,9 +161,18 @@ function Poll({ data }) {
           The Poll is create by {data.created_by}
         </Typography>
 
+        {data.is_expired && (<Typography color="textSecondary" variant="p" gutterBottom>
+          Expired - {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs
+        </Typography>)}
+
+        {!data.is_expired && (<Typography color="textSecondary" variant="p" gutterBottom>
+          Not Expired - {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs
+        </Typography>)}
+
         <Typography variant="h5" component="h2">
           {data.question}
         </Typography>
+
         {!voted && (<FormControl component="fieldset">
           <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
             <FormControlLabel
@@ -183,7 +203,7 @@ function Poll({ data }) {
         </FormControl>)}
       </CardContent>
       <div class={classes.btns}>
-        {!voted && (<Button
+        {!voted && !data.is_expired && (<Button
           startIcon={<CalendarViewDayIcon />}
           color="secondary"
           variant="contained"
@@ -192,7 +212,7 @@ function Poll({ data }) {
           Submit
         </Button>)}
         {data.created_by === userActive && (<Button
-          style={{ backgroundColor: '#be93c5' }}
+          style={{ fackgFloorColor: '#be93c5' }}
           variant="contained"
           onClick={deleteIt}
         >

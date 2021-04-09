@@ -7,7 +7,6 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import { Button, FormControlLabel, Switch } from '@material-ui/core';
 import { database } from '../firebase-config';
-import firebase from 'firebase'
 import { FirebaseUserDefaultData } from '../utils/default';
 import { UserContext } from '../context/userContext';
 

@@ -12,4 +12,5 @@ export const FirebaseUserDefaultData = {
   created_at: '',
   isAnonymous: false,
   answered_by: [],
+  is_expired: false,
 }

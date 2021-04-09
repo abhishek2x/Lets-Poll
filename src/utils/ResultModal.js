@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -26,11 +26,6 @@ export default function LoginModal({ names }) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-    showPassword: false,
-  });
 
   // Basic Functions
   const handleOpen = () => {

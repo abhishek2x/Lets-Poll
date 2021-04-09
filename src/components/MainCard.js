@@ -5,6 +5,6 @@ export default function MainCard({ pollData1 }) {
 
   return (
     pollData1.map((data) => (!data.isAnonymous) && (
-      <Poll data={data} />
+      <Poll key={data.id} data={data} />
     )));
 }

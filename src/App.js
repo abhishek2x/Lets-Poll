@@ -27,7 +27,7 @@ function App() {
         dark: 'rgba(0, 0, 0, 0.54)'
       },
     }
-  });
+  }, [pollData]);
 
   useEffect(() => {
     database.collection('polls').orderBy('created_at', 'desc').get()

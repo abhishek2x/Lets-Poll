@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, makeStyles } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import GmailIcon from '../static/images/google.svg'
 
 
