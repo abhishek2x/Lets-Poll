@@ -46,7 +46,8 @@ function App() {
       .catch(error => {
         console.log(error);
       });
-  }, [pollData])
+    console.log("Wasting time in App.js")
+  }, [])
 
   //   database.collection('polls').orderBy('created_at', 'desc').get()
   //     .then((querySnapshot) => {

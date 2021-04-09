@@ -1,8 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router';
-import { UidContext } from '../context/uidContext';
-import { auth, database } from '../firebase-config';
-import firebase from 'firebase'
+import React, { useContext, useState } from 'react'
+// import { useParams } from 'react-router';
+// import { UidContext } from '../context/uidContext';
+import { database } from '../firebase-config';
+// import firebase from 'firebase'
 import { UserContext } from '../context/userContext';
 import Poll from '../components/Poll';
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile({ pollData }) {
   const classes = useStyles();
-  const { uid } = useParams();
+  // const { uid } = useParams();
   const [docData, setDocData] = useState([])
-  const [user, setUser] = useContext(UserContext)
+  const [user] = useContext(UserContext)
 
   return (
     <Container className={classes.box}>

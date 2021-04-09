@@ -7,9 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import { Button, FormControlLabel, Switch } from '@material-ui/core';
 import { database } from '../firebase-config';
-import { UserContext } from '../context/userContext';
 import firebase from 'firebase'
 import { FirebaseUserDefaultData } from '../utils/default';
+import { UserContext } from '../context/userContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export default function InputAdornments() {
   const classes = useStyles();
   const [values, setValues] = useState(FirebaseUserDefaultData);
+  const [userActive] = useContext(UserContext)
 
   const createPoll = () => {
     const currentDate = new Date()
@@ -44,7 +45,7 @@ export default function InputAdornments() {
       option2_count: 0,
       option3_count: 0,
       option4_count: 0,
-      created_by: firebase.auth().currentUser.displayName,
+      created_by: userActive,
       created_at: currentDate.getTime()
     })
       .then(() => {
