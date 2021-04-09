@@ -58,6 +58,9 @@ export default function LoginModal() {
         console.log(result)
         setUser(result.additionalUserInfo.username)
       })
+      .catch((err) => {
+        alert(err)
+      })
   }
 
   const signInGitHub = (e) => {
@@ -67,6 +70,9 @@ export default function LoginModal() {
       .then((result) => {
         console.log(result)
         setUser(result.additionalUserInfo.username)
+      })
+      .catch((err) => {
+        alert(err)
       })
   }
 

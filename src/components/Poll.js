@@ -9,6 +9,7 @@ import { database } from '../firebase-config';
 import firebase from 'firebase'
 import { UserContext } from '../context/userContext';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ResultModal from '../utils/ResultModal'
 
 function LinearProgressWithLabel(props) {
   return (
@@ -24,15 +25,6 @@ function LinearProgressWithLabel(props) {
     </Box>
   );
 }
-
-// LinearProgressWithLabel.propTypes = {
-//   /**
-//    * The value of the progress indicator for the determinate and buffer variants.
-//    * Value between 0 and 100.
-//    */
-//   value: PropTypes.number.isRequired,
-// };
-
 
 
 const useStyles = makeStyles({
@@ -53,6 +45,10 @@ const useStyles = makeStyles({
   },
   result: {
     margin: 15
+  }, btns: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 5
   }
 });
 
@@ -69,9 +65,11 @@ function Poll({ data }) {
 
   useEffect(() => {
     console.log("checkking if already answerd")
+
+
     data.answered_by.forEach(name => {
       if (name === userActive) {
-        setVoted(false);
+        setVoted(true);
       }
     });
 
@@ -79,6 +77,13 @@ function Poll({ data }) {
     setAns2((data.option2_count / (data.option1_count + data.option2_count + data.option3_count + data.option4_count)) * 100)
     setAns3((data.option3_count / (data.option1_count + data.option2_count + data.option3_count + data.option4_count)) * 100)
     setAns4((data.option4_count / (data.option1_count + data.option2_count + data.option3_count + data.option4_count)) * 100)
+
+    if (ans1 === NaN && ans2 === NaN && ans3 === NaN && ans4 === NaN) {
+      setAns1(0);
+      setAns2(0);
+      setAns3(0);
+      setAns4(0);
+    }
   }, [])
 
   const handleChange = (event) => {
@@ -168,20 +173,29 @@ function Poll({ data }) {
           </RadioGroup>
         </FormControl>)}
       </CardContent>
+      <div class={classes.btns}>
+        {!voted && (<Button
+          startIcon={<CalendarViewDayIcon />}
+          color="secondary"
+          variant="contained"
+          onClick={submitPoll}
+        >
+          Submit
+        </Button>)}
+        {data.created_by === userActive && (<Button
+          style={{ backgroundColor: '#be93c5' }}
+          variant="contained"
+        // onClick={submitPoll}
+        >
+          Delete Poll
+        </Button>)}
 
-      {!voted && (<Button
-        startIcon={<CalendarViewDayIcon />}
-        color="secondary"
-        variant="contained"
-        id={data.id}
-        onClick={submitPoll}
-        style={{ marginLeft: '38%' }}
-      >
-        Submit
-      </Button>)}
+        {!data.isAnonymous && (<ResultModal names={data.answered_by} />)}
+      </div>
+
       <br />
 
-      { !voted ? (
+      { voted ? (
         <div className={classes.result}>
           <Typography id="discrete-slider" gutterBottom>
             {data.option1}

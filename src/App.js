@@ -29,7 +29,6 @@ function App() {
     }
   });
 
-
   useEffect(() => {
     database.collection('polls').orderBy('created_at', 'desc').get()
       .then((response) => {
