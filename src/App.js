@@ -30,10 +30,10 @@ function App() {
   }, [pollData]);
 
   useEffect(() => {
-    database.collection('polls').orderBy('created_at', 'desc').get()
-      .then((response) => {
+    database.collection('polls').orderBy('created_at', 'desc')
+      .onSnapshot((snap) => {
         const fetchedPolls = [];
-        response.forEach(document => {
+        snap.forEach(document => {
           const fetchedPoll = {
             id: document.id,
             ...document.data()
@@ -42,16 +42,8 @@ function App() {
         });
         setPollData(fetchedPolls);
       })
-      .catch(error => {
-        console.log(error);
-      });
     console.log("Wasting time in App.js")
   }, [])
-
-  //   database.collection('polls').orderBy('created_at', 'desc').get()
-  //     .then((querySnapshot) => {
-  //       setPollData(querySnapshot.docs.map((doc) => doc.data()))
-  //     });
 
   return (
     <ThemeProvider theme={theme}>
