@@ -69,7 +69,7 @@ function Poll({ data }) {
       const currTime = currentDate.getTime()
       // console.log((currTime - data.created_at) / 1000)
       setTime((currTime - data.created_at) / 1000) //setting time in secs
-      if ((currTime - data.created_at > 300000) && !data.is_expired) { 
+      if ((currTime - data.created_at > 300000) && !data.is_expired) {
         database.collection("polls").doc(data.id).update({
           is_expired: true
         })
@@ -98,7 +98,7 @@ function Poll({ data }) {
       setAns3(0);
       setAns4(0);
     }
-  }, [])
+  }, [ans1, ans2, ans3, ans4, data.option1_count, data.option2_count, data.option3_count, data.option4_count, data.answered_by, userActive])
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -160,13 +160,13 @@ function Poll({ data }) {
         <Typography color="textSecondary" gutterBottom>
           The Poll is create by {data.created_by}
         </Typography>
-          
+
         {data.is_expired && (<Typography color="textSecondary" variant="p" gutterBottom>
-          <b>Expired</b> <br/>  Created {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs ago
+          <b>Expired</b> <br />  Created {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs ago
         </Typography>)}
 
         {!data.is_expired && (<Typography color="textSecondary" variant="p" gutterBottom>
-          <b>Not Expired</b> <br/>  Created {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs ago
+          <b>Not Expired</b> <br />  Created {Math.floor(time / 60)} mins and {Math.floor(time % 60)} secs ago
         </Typography>)}
 
         <Typography variant="h5" component="h2">
